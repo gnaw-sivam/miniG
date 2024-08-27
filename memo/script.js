@@ -18,32 +18,27 @@ function stopTimer() {
     timerInterval = null; // Clear the timerInterval reference
 }
 
-function createBoard() {
-    const cardValues = [
-        'https://picsum.photos/200/300?random=1',
-        'https://picsum.photos/200/300?random=1',
-        'https://picsum.photos/200/300?random=2',
-        'https://picsum.photos/200/300?random=2',
-        'https://picsum.photos/200/300?random=3',
-        'https://picsum.photos/200/300?random=3',
-        'https://picsum.photos/200/300?random=4',
-        'https://picsum.photos/200/300?random=4',
-        'https://picsum.photos/200/300?random=5',
-        'https://picsum.photos/200/300?random=5',
-        'https://picsum.photos/200/300?random=6',
-        'https://picsum.photos/200/300?random=6',
-        'https://picsum.photos/200/300?random=7',
-        'https://picsum.photos/200/300?random=7',
-        'https://picsum.photos/200/300?random=8',
-        'https://picsum.photos/200/300?random=8'
-    ];
+function generateRandomImageUrl() {
+    const randomNum = Math.floor(Math.random() * 1000) + 1; // Generate a random number between 1 and 1000
+    return `https://picsum.photos/200/300?random=${randomNum}`;
+}
 
-    // Shuffle the card values
-    const shuffledCardValues = cardValues.sort(() => 0.5 - Math.random());
+function createBoard() {
+    const imageUrls = [];
+    const totalCards = 16; // Total number of cards
+
+    // Generate pairs of random images
+    for (let i = 0; i < totalCards / 2; i++) {
+        const url = generateRandomImageUrl();
+        imageUrls.push(url, url); // Add the same URL twice to create a pair
+    }
+
+    // Shuffle the image URLs
+    const shuffledImageUrls = imageUrls.sort(() => 0.5 - Math.random());
 
     gameBoard.innerHTML = ''; // Clear the board
 
-    shuffledCardValues.forEach(value => {
+    shuffledImageUrls.forEach(value => {
         const card = document.createElement('div');
         card.classList.add('card');
         const cardImage = document.createElement('img');
@@ -69,7 +64,7 @@ function createBoard() {
                         flippedCards[1].classList.add('matched');
                         matchedCards += 2;
 
-                        if (matchedCards === shuffledCardValues.length) {
+                        if (matchedCards === shuffledImageUrls.length) {
                             stopTimer();
                             setTimeout(() => alert('You won!'), 300);
                         }

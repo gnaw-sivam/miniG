@@ -72,13 +72,14 @@ body {
 
 #timer {
     margin-top: 1rem;
-    font-size: 1.5rem; /* Larger font size for desktop */
+    font-size: 3rem; /* Larger font size for desktop */
+    font-weight: bold;
 }
 
 #resetButton {
     margin-top: 1rem;
     padding: 0.75rem 1.5rem;
-    font-size: 1.2rem;
+    font-size: 2rem;
     cursor: pointer;
     background-color: #007bff;
     color: #fff;
@@ -121,12 +122,12 @@ footer a:hover {
     }
 
     #timer {
-        font-size: 1.2rem; /* Adjusted for smaller screens */
+        font-size: 3rem; /* Adjusted for smaller screens */
     }
 
     #resetButton {
         padding: 0.5rem 1rem;
-        font-size: 1rem;
+        font-size: 2rem;
     }
 }
 
@@ -137,12 +138,12 @@ footer a:hover {
     }
 
     #timer {
-        font-size: 1rem; /* Smaller font size for very small screens */
+        font-size: 3rem; /* Smaller font size for very small screens */
     }
 
     #resetButton {
         padding: 0.5rem 0.75rem;
-        font-size: 0.9rem;
+        font-size: 2rem;
     }
 }
 
@@ -153,11 +154,11 @@ footer a:hover {
     }
 
     #timer {
-        font-size: 2rem; /* Larger font size for larger screens */
+        font-size: 3rem; /* Larger font size for larger screens */
     }
 
     #resetButton {
         padding: 1rem 2rem;
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 }
