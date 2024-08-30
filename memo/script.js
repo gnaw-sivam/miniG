@@ -1,4 +1,6 @@
-let gameBoard, timerDisplay, resetButton;
+// let gameBoard, timerDisplay, resetButton;
+let gameBoard, timerDisplay, resetButton, winModal, finalTimeSpan, closeModal;
+
 let flippedCards = [];
 let matchedCards = 0;
 let startTime;
@@ -16,6 +18,8 @@ function startTimer() {
 function stopTimer() {
     clearInterval(timerInterval);
     timerInterval = null; // Clear the timerInterval reference
+    const elapsed = Math.floor((Date.now() - startTime) / 1000); // Calculate elapsed time
+    return elapsed; // Return the elapsed time
 }
 
 function generateRandomImageUrl() {
@@ -65,16 +69,18 @@ function createBoard() {
                         matchedCards += 2;
 
                         if (matchedCards === shuffledImageUrls.length) {
-                            stopTimer();
-                            setTimeout(() => alert('You won!'), 300);
+                            const finalTime = stopTimer(); // Capture the final time
+                            finalTimeSpan.textContent = `Time: ${finalTime}s`; // Update the final time in the modal
+                            winModal.style.display = "block"; // Show the modal
                         }
+
                     } else {
                         flippedCards[0].classList.remove('flipped');
                         flippedCards[1].classList.remove('flipped');
                     }
                     flippedCards = [];
                     lockBoard = false;
-                }, 1000); // Shortened flipping time
+                }, 200); // Shortened flipping time
             }
         });
 
@@ -95,8 +101,21 @@ document.addEventListener('DOMContentLoaded', () => {
     gameBoard = document.getElementById('gameBoard');
     timerDisplay = document.getElementById('timer');
     resetButton = document.getElementById('resetButton');
+    winModal = document.getElementById('winModal');
+    finalTimeSpan = document.getElementById('finalTime');
+    closeModal = document.querySelector('.close');
 
     createBoard();
 
     resetButton.addEventListener('click', resetGame);
+
+    closeModal.addEventListener('click', () => {
+        winModal.style.display = "none"; // Hide the modal when the close button is clicked
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === winModal) {
+            winModal.style.display = "none"; // Hide the modal when clicking outside of it
+        }
+    });
 });
